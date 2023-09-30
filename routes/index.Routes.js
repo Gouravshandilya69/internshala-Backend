@@ -1,6 +1,6 @@
 const express = require("express")
 const router = express.Router()
-const { homepage,studentsignup,studentsignin,studentsignout,currentUser } = require("../controllers/indexControllers")
+const { homepage,studentsignup,studentsignin,studentsignout,currentUser,studentForget } = require("../controllers/indexControllers")
 const { isAuthenticated } = require("../middlewares/auth")
 
 // get route
@@ -13,6 +13,8 @@ router.post("/student/signup",studentsignup)
 router.post("/student/signin",studentsignin)
 // post student/signout
 router.get("/student/signout", isAuthenticated,studentsignout)
+// post student/forget
+router.post("/student/forget",studentForget)
 
 
 

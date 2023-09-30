@@ -2,7 +2,7 @@ const { catchAsyncErr } = require("../middlewares/catchAsyncErr")
 const student = require("../models/studentModel")
 const ErrorHandler = require("../utils/errorHandler")
 const { sendtoken } = require("../utils/sendToken")
-
+const {sendmail} = require("../utils/nodemailer")
 
 exports.homepage = catchAsyncErr(async (req, res, next) => {
 
@@ -10,8 +10,6 @@ exports.homepage = catchAsyncErr(async (req, res, next) => {
 
 
 })
-
-
 
 // current user details 
 exports.currentUser = catchAsyncErr(async (req, res, next) => {
@@ -48,5 +46,26 @@ exports.studentsignout = catchAsyncErr(async (req, res, next) => {
     res.clearCookie("token")
     res.json({ message: "successfully signout" })
 
+
+})
+
+//forget password route controller
+exports.studentForget = catchAsyncErr(async (req, res, next) => {
+
+    const Student = await student.findOne({ email:req.body.email }).exec()
+
+    if (!Student)
+        return next(
+            new ErrorHandler("User not found with this email address", 404)
+        )
+
+
+        const url = `${req.protocol}://${req.get("host")}/student/forget/link/${Student._id}`
+
+
+sendmail(req,res,next,url)
+
+    res.json({ Student,url })
+    
 
 })
