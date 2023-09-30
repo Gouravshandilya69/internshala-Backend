@@ -6,12 +6,21 @@ const { sendtoken } = require("../utils/sendToken")
 
 exports.homepage = catchAsyncErr(async (req, res, next) => {
 
-    res.json({ message: "Madarchod homepage" })
+    res.json({ message: "secure homepage!" })
 
 
 })
 
 
+
+// current user details 
+exports.currentUser = catchAsyncErr(async (req, res, next) => {
+    const Student = await student.findById(req.id)
+
+    res.json({ Student })
+
+
+})
 //sign up route controller
 exports.studentsignup = catchAsyncErr(async (req, res, next) => {
     const Student = await new student(req.body).save()
@@ -36,5 +45,8 @@ exports.studentsignin = catchAsyncErr(async (req, res, next) => {
 
 //sign out route controller
 exports.studentsignout = catchAsyncErr(async (req, res, next) => {
+    res.clearCookie("token")
+    res.json({ message: "successfully signout" })
+
 
 })
