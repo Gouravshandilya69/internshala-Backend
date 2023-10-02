@@ -35,18 +35,14 @@ app.use(fileupload())
 
 
 // Routes
-app.use('/', require("./routes/index.Routes"))
-
-
-
+app.use('/user', require("./routes/index.Routes"))
+app.use('/resume', require("./routes/resumeRoutes"))
 
 
 
 // error handling
 const ErrorHandler = require("./utils/errorHandler")
 const { generatedErrors } = require("./middlewares/errors")
-
-
 app.all("*", (req, res, next) => {
     next(new ErrorHandler(`PAGE NOT FOUND ${req.url}`, 404))
 })

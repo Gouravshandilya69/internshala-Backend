@@ -131,7 +131,7 @@ exports.studentUpdate =  catchAsyncErr(async (req, res, next) => {
 
 })
 
-
+//upload image controller
 exports.avatarUpdate = catchAsyncErr(async (req, res, next) => {
 const Student = await student.findById(req.params.id)
     const file = req.files.avatar
@@ -155,3 +155,5 @@ const Student = await student.findById(req.params.id)
     
  
  })
+
+ 
