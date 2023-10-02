@@ -1,6 +1,6 @@
 const express = require("express")
 const router = express.Router()
-const { homepage,studentsignup,studentsignin,studentsignout,currentUser,studentForget,studentforgetlink,studentresetpassword } = require("../controllers/indexControllers")
+const { homepage,studentsignup,studentsignin,studentsignout,currentUser,studentForget,studentforgetlink,studentresetpassword,studentUpdate,avatarUpdate } = require("../controllers/indexControllers")
 const { isAuthenticated } = require("../middlewares/auth")
 
 // get route
@@ -17,7 +17,10 @@ router.get("/student/signout", isAuthenticated,studentsignout)
 router.post("/student/forget",studentForget)
 // get /student/forget/link/:id
 router.get("/student/forget/link/:id",studentforgetlink)
-// get /student/resetpassword route
+// post /student/resetpassword route
 router.post("/student/resetpassword",isAuthenticated,studentresetpassword)
-
+// post /student/update/:studentId route
+router.post("/student/update/:id",isAuthenticated,studentUpdate)
+// post /student/avatar/:Id route
+router.post("/student/avatar/:id",isAuthenticated,avatarUpdate)
 module.exports = router
