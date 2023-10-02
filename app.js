@@ -37,6 +37,8 @@ app.use(fileupload())
 // Routes
 app.use('/user', require("./routes/index.Routes"))
 app.use('/resume', require("./routes/resumeRoutes"))
+app.use('/employee', require("./routes/employeRoutes"))
+
 
 
 

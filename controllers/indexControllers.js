@@ -120,40 +120,39 @@ exports.studentresetpassword = catchAsyncErr(async (req, res, next) => {
 
 
 //update details controller
-exports.studentUpdate =  catchAsyncErr(async (req, res, next) => {
+exports.studentUpdate = catchAsyncErr(async (req, res, next) => {
 
-   await student.findByIdAndUpdate(req.params.id , req.body).exec()
-     res.status(200).json({
-    success:true,
-    message:"Student updated successfully!",
+    await student.findByIdAndUpdate(req.params.id, req.body).exec()
+    res.status(200).json({
+        success: true,
+        message: "Student updated successfully!",
 
-   })
+    })
 
 })
 
 //upload image controller
 exports.avatarUpdate = catchAsyncErr(async (req, res, next) => {
-const Student = await student.findById(req.params.id)
+    const Student = await student.findById(req.params.id)
     const file = req.files.avatar
     const newFileName = `resumebuilder-${Date.now()}${path.extname(file.name)}`
 
-    if(Student.avatar.fileId!==""){
+    if (Student.avatar.fileId !== "") {
         await imagekit.deleteFile(Student.avatar.fileId)
     }
-    const {fileId,url }= await imagekit.upload({
-        file:file.data,
-        fileName:newFileName
+    const { fileId, url } = await imagekit.upload({
+        file: file.data,
+        fileName: newFileName
     })
 
-    Student.avatar = {fileId , url}
+    Student.avatar = { fileId, url }
     await Student.save()
     res.status(200).json({
-        success:true,
-        message:"Profile uploaded successfully!",
-     })
-    
-    
- 
- })
+        success: true,
+        message: "Profile uploaded successfully!",
+    })
 
- 
+
+
+})
+
