@@ -59,10 +59,9 @@ const employeeModel = new mongoose.Schema(
             }
         },
         internship:[
-            {
-                type:mongoose.Schema.Types.ObjectId,
-                ref:"internships"
-            }
+           {   type:mongoose.Schema.Types.ObjectId,
+            ref:"internship"
+        }
         ],
         jobs:[
             {

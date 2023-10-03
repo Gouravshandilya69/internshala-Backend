@@ -9,7 +9,10 @@ const { homepage,
     employeeForgetLink,
     employeeResetPassword,
     employeeUpdate,
-    employeeAvatarUpdate } = require("../controllers/employeeControllers")
+    employeeAvatarUpdate,
+    employeeCreateInternship,
+    employeeSingleReadInternship,
+    employeeReadInternship } = require("../controllers/employeeControllers")
 const { isAuthenticated } = require("../middlewares/auth")
 
 // get route
@@ -32,4 +35,19 @@ router.post("/resetpassword", isAuthenticated, employeeResetPassword)
 router.post("/update/:id", isAuthenticated, employeeUpdate)
 // post /student/avatar/:Id route
 router.post("/logo/:id", isAuthenticated, employeeAvatarUpdate)
+
+ //----------------------------INTERNSHIPS ROUTES----------------------------
+
+// post /employee/internship/create route
+router.post("/internship/create", isAuthenticated, employeeCreateInternship)
+// post /employee/internship/read route for reading all the internship
+router.post("/internship/read", isAuthenticated, employeeReadInternship)
+// post /employee/internship/read/:id route only for reading a single internship data
+router.post("/internship/read/:id", isAuthenticated, employeeSingleReadInternship)
+
+
+
+
+
+
 module.exports = router
