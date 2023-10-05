@@ -1,13 +1,14 @@
 require("dotenv").config({ path: "./.env" })
 const express = require("express")
+const cors = require("cors")
 const app = express()
 
+app.use(cors());
 
 
 
 //mongoDb connection
 require("./models/database").connectDatabase()
-
 
 
 //logger
@@ -35,7 +36,7 @@ app.use(fileupload())
 
 
 // Routes
-app.use('/user', require("./routes/index.Routes"))
+app.use('/', require("./routes/index.Routes"))
 app.use('/resume', require("./routes/resumeRoutes"))
 app.use('/employee', require("./routes/employeRoutes"))
 

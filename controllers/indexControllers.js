@@ -8,7 +8,7 @@ const path = require("path")
 
 
 exports.homepage = catchAsyncErr(async (req, res, next) => {
-
+  
     res.json({ message: "secure homepage!" })
 
 
